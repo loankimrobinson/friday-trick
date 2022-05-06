@@ -33,4 +33,4 @@ p1
 
 ![](friday-tricks_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
-![plot](p1.png)
+![plot](figures/p1.png)
