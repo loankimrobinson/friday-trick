@@ -39,14 +39,54 @@ source("source/trick_20220506.R")
 The bar width is too big???? What happened?
 
 ```{r  warning=FALSE, message=FALSE}
+print(dt)
 p1 <- ggplot(dt, aes(y = n, x = RACE, colour = ARM, fill = ARM)) +
   geom_bar(stat = 'identity',position = position_dodge(0.95), width = 0.9) +
   geom_text(aes(label = count, colour = ARM), size = 4,vjust= -0.5, position = position_dodge(0.95)) +
   scale_color_manual("",values = c(color_fill)) + 
   scale_fill_manual('', values = c(color_fill))
 p1 <- gg_plot_theme(p1, y_label = "Count", x_label = "Race", title = "Why the first bar width is so BIG?", legend = "none")
-p1
+
 ```
 
-![plot](p1.png)
+![plot](figures/p1.png)
+
+
+Let fix it! I need to add *preserve = "single"* to *position = position_dodge(0.95,preserve = "single")*
+
+Guess what? 
+
+
+```{r  warning=FALSE, message=FALSE}
+p2 <- ggplot(dt, aes(y = n, x = RACE, colour = ARM, fill = ARM)) +
+  geom_bar(stat = 'identity',, width = 0.9) +
+  geom_text(aes(label = count, colour = ARM), size = 4,vjust= -0.5, position = position_dodge(0.95)) +
+  scale_color_manual("",values = c(color_fill)) + 
+  scale_fill_manual('', values = c(color_fill))
+p2 <- gg_plot_theme(p2, y_label = "Count", x_label = "Race", title = "Adding preserve = 'single'", legend = "none")
+```
+
+![plot](figures/p2.png)
+
+
+Yeah, it fixed......but......why the labels were off. Oh man, google ......
+
+I get it, let use *complete()* to fix the data 
+
+
+
+
+```{r  warning=FALSE, message=FALSE}
+# Fill data with NA
+dt_fill <- data.frame(dt)
+dt_fill  <- complete(dt_fill,ARM,RACE)
+p3 <- ggplot(dt_fill, aes(y = n, x = RACE, colour = ARM, fill = ARM)) +
+     geom_bar(stat = 'identity',position = position_dodge(0.95,preserve = "single"), width = 0.9) +
+     geom_text(aes(label = count, colour = ARM), size = 4,vjust= -0.5, position = position_dodge(0.95)) +
+     scale_color_manual("",values = c(color_fill)) + 
+     scale_fill_manual('', values = c(color_fill))
+p3 <- gg_plot_theme(p3, y_label = "Count", x_label = "Race", title = " Fill data with complete()", legend = "none")
+```
+
+![plot](figures/p3.png)
 
