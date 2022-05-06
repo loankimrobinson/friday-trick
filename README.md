@@ -80,8 +80,8 @@ p3 <- ggplot(dt_fill, aes(y = n, x = RACE, colour = ARM, fill = ARM)) +
 p3 <- gg_plot_theme(p3, y_label = "Count", x_label = "Race", title = " Fill data with complete()", legend = "none")
 ```
 
-![plot](figures/p3.png)
 
 Finally I got what I wanted
 
 ![plot](figures/ggplot_bar.png)
+
