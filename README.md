@@ -79,9 +79,4 @@ p3 <- ggplot(dt_fill, aes(y = n, x = RACE, colour = ARM, fill = ARM)) +
      scale_fill_manual('', values = c(color_fill))
 p3 <- gg_plot_theme(p3, y_label = "Count", x_label = "Race", title = " Fill data with complete()", legend = "none")
 ```
-
-<<<<<<< HEAD
 ![plot](figures/p3.png)
-=======
-![plot](figures/p1.png)
->>>>>>> 9ab90387b1bbfdded60e0d863353fe50319e55d8
