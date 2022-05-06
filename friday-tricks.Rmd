@@ -1,0 +1,50 @@
+---
+title: |
+  <center> Friday Tricks </center>
+  |
+  |
+  |
+author:
+- name: Loan Kim Robinson
+  url: https://github.com/loankimrobinson
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    number_sections: yes
+    toc: yes
+header-includes:
+- \hypersetup{colorlinks=true,linkcolor=red,allcolors=blue,citecolor=blue,urlcolor=blue}
+- \usepackage{indentfirst}
+- \usepackage{graphicx}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{eso-pic}
+- \usepackage{transparent}
+- \usepackage[export]{adjustbox}
+- \usepackage{fix-cm}
+---
+
+
+\n\n\n\n\n
+
+# GGgplot tricks {#ggplot}
+
+## Bar plot width {#ggplot_barwidth}
+
+
+Why the bar widths were so *fat* ?????? when the levels of categorical variable were missing.
+
+
+Let's fix it. I have 
+
+```{r  echo = TRUE, warning=FALSE, message=FALSE}
+
+
+
+```
+
+
+
