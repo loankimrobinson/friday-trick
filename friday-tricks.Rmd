@@ -1,50 +1,52 @@
 ---
-title: |
-  <center> Friday Tricks </center>
-  |
-  |
-  |
+title: "README"
 author:
 - name: Loan Kim Robinson
   url: https://github.com/loankimrobinson
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
-  html_document:
-    df_print: paged
-    toc: yes
-  pdf_document:
-    number_sections: yes
-    toc: yes
-header-includes:
-- \hypersetup{colorlinks=true,linkcolor=red,allcolors=blue,citecolor=blue,urlcolor=blue}
-- \usepackage{indentfirst}
-- \usepackage{graphicx}
-- \usepackage{booktabs}
-- \usepackage{longtable}
-- \usepackage{eso-pic}
-- \usepackage{transparent}
-- \usepackage[export]{adjustbox}
-- \usepackage{fix-cm}
+  md_document:
+    variant: markdown_github
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(haven)
+library(tidyverse)
+library(ggplot2)
+```
 
-\n\n\n\n\n
+## Gggplot tricks {#ggplot}
 
-# GGgplot tricks {#ggplot}
-
-## Bar plot width {#ggplot_barwidth}
+### Bar plot width {#ggplot_barwidth}
 
 
 Why the bar widths were so *fat* ?????? when the levels of categorical variable were missing.
 
 
-Let's fix it. I have 
+Let's fix it. 
 
-```{r  echo = TRUE, warning=FALSE, message=FALSE}
-
-
-
+```{r  warning=FALSE, message=FALSE}
+# read data
+adsl <- read_xpt("data/adsl.xpt")
+color_fill <- c("#008080","#35aab2","#83d4da")
+# create count table
+dt <- adsl  %>% count(ARM,RACE) %>% group_by(ARM) %>% mutate( per = (n/ sum(n))*100) %>% mutate( count = paste0(n, " (", sprintf('%.1f', per), "%)"))
+source("source/trick_20220506.R")
 ```
 
 
+The bar width is too big???? What happened?
+
+```{r  warning=FALSE, message=FALSE}
+p1 <- ggplot(dt, aes(y = n, x = RACE, colour = ARM, fill = ARM)) +
+  geom_bar(stat = 'identity',position = position_dodge(0.95), width = 0.9) +
+  geom_text(aes(label = count, colour = ARM), size = 4,vjust= -0.5, position = position_dodge(0.95)) +
+  scale_color_manual("",values = c(color_fill)) + 
+  scale_fill_manual('', values = c(color_fill))
+p1 <- gg_plot_theme(p1, y_label = "Count", x_label = "Race", title = "Why the first bar width is so BIG?", legend = "none")
+p1
+```
+
+![plot](p1.png)
 

@@ -2,7 +2,7 @@
 library(haven)
 library(tidyverse)
 library(ggplot2)
-library(plotly)
+
 
 # read data
 adsl <- read_xpt("data/adsl.xpt")
